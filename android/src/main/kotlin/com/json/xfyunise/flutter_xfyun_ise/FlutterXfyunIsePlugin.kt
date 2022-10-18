@@ -103,7 +103,6 @@ class FlutterXfyunIsePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 Log.e(TAG, "初始化成功")
             }
         }
-
     }
 
     /**

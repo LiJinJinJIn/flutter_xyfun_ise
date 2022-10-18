@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_xfyun_ise/bean/ise_param.dart';
 import 'package:flutter_xfyun_ise/flutter_xfyun_ise.dart';
+import 'package:flutter_xfyun_ise_example/audio/AudioPlayerManager.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   ///测试内容文本
   var content = "一座座雪峰插入云霄，峰顶银光闪闪，大大小小的湖泊，像颗颗宝石镶嵌在彩带般的沟谷中。";
   var _score = "暂无评分";
+  var _path = "";
 
   @override
   void initState() {
@@ -45,6 +48,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> setIseParameter() async {
     var dir = await getTemporaryDirectory();
+    _path = "${dir.path}/${111222}.wav";
     //设置参数
     FlutterXfyunIse.instance.setParameter(
       param: IseParam()
@@ -62,8 +66,9 @@ class _MyAppState extends State<MyApp> {
         ..textEncoding = "utf-8"
         ..aue = "opus"
         ..audioFormat = "wav"
-        ..iseAudioPath = "${dir.path}/ise.wav",
+        ..iseAudioPath = "$_path",
     );
+    print("setIseParameter  路径展示 :        ${_path}");
   }
 
   Future<void> initPlatformState() async {
@@ -130,6 +135,18 @@ class _MyAppState extends State<MyApp> {
                 onTap: () {
                   //结果解析
                   FlutterXfyunIse.instance.resultsParsing();
+                },
+              ),
+              InkWell(
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  color: Colors.red,
+                  alignment: Alignment.center,
+                  child: Text("播放录音音频"),
+                ),
+                onTap: () async {
+                  AudioPlayerManager.instance.play(_path);
                 },
               ),
             ],
