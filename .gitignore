@@ -11,6 +11,9 @@
 # Files for the ART/Dalvik VM
 *.dex
 
+# VSCode Build
+.lh/
+
 # Java class files
 *.class
 
