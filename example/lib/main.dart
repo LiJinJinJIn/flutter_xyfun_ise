@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
     });
     FlutterXfyunIse.instance.setOnResultListener((score) {
       print("****************************");
+      //20006: 权限问题
       print("回调信息：    ${score}");
       setState(() {
         _score = score;
@@ -48,9 +49,9 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> setIseParameter() async {
     var dir = await getTemporaryDirectory();
-    _path = "${dir.path}/${111222}.wav";
+    _path = "${dir.path}/ise.wav";
     //设置参数
-    FlutterXfyunIse.instance.setParameter(
+    await FlutterXfyunIse.instance.setParameter(
       param: IseParam()
         ..language = "zh_cn"
         ..category = "read_sentence"
@@ -97,7 +98,10 @@ class _MyAppState extends State<MyApp> {
                 ),
                 onTap: () {
                   setIseParameter();
-                  FlutterXfyunIse.instance.start(content: content);
+                  //todo 这里给一个延时处理
+                  Future.delayed(Duration(seconds: 1), () {
+                    FlutterXfyunIse.instance.start(content: content);
+                  });
                 },
               ),
               InkWell(
@@ -146,7 +150,7 @@ class _MyAppState extends State<MyApp> {
                   child: Text("播放录音音频"),
                 ),
                 onTap: () async {
-                  AudioPlayerManager.instance.play(_path);
+                  AudioPlayerManager.instance.playToFile(_path);
                 },
               ),
             ],

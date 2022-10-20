@@ -23,8 +23,18 @@ class AudioPlayerManager {
   }
 
   //播放视频
-  void play(String filePath) {
+  void playToFile(String filePath) {
     var result = _audioPlayer?.play(DeviceFileSource(filePath));
+    if (result == 1) {
+      print('pause success');
+    } else {
+      print('pause failed');
+    }
+  }
+
+  //播放视频
+  void playToUrl(String url) {
+    var result = _audioPlayer?.play(UrlSource(url));
     if (result == 1) {
       print('pause success');
     } else {

@@ -82,7 +82,6 @@ class FlutterXfyunIsePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 Log.e(TAG, "遍历数据操作：           ${it.key.toString()}   ${it.value.toString()}")
                 mEvaluator?.setParameter(it.key, it.value)
             }
-
         } catch (e: Exception) {
             Log.e(TAG, "e ：         $e")
             e.printStackTrace()
