@@ -60,7 +60,7 @@ flutter:
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
 
-#false_secrets:
-#  - /android/libs/arm64-v8a/libmsc.so
-#  - /android/libs/armeabi-v7a/libmsc.so
-#  - /ios/Frameworks/iflyMSC.framework/iflyMSC
+false_secrets:
+  - /android/libs/arm64-v8a/libmsc.so
+  - /android/libs/armeabi-v7a/libmsc.so
+  - /ios/Frameworks/iflyMSC.framework/iflyMSC
